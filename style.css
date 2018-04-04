@@ -225,7 +225,7 @@ ul {
 /* -- Middle Header */
 .middle-header {
 	padding: 35px 0;
-	background-image: url("images/header-bg.jpg");
+	/*background-image: url("images/header-bg.jpg");*/
 	background-repeat: repeat-x;
 }
 .middle-header .location,
