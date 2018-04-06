@@ -35,6 +35,8 @@
 
 /* ## Global */
 
+
+
 body {
 	font-family: 'PT Sans', sans-serif;
 	font-size: 14px;
@@ -276,7 +278,7 @@ ul {
 .contact-details:after {
 	content: "";
 	position: absolute;
-	border-bottom: 60px solid #0072b5; 
+	border-bottom: 60px solid #1f9686; 
 	top: 0;
 }
 .contact-details:before {
@@ -288,8 +290,8 @@ ul {
 	right: -20px;
 }
 .contact-details .detail-box {
-	padding: 30px 15px 30px 97px;
-	background-color: #33a9ee;
+	padding: 30px 15px 30px 97px;	
+	background-color: #4cb9aa;
 }
 .contact-details .detail-box,
 .contact-details .detail-box a { 
@@ -300,10 +302,10 @@ ul {
 	height: 61px;
 	position: absolute;
 	left: 0;
-	line-height: 60px;
-	background-color: #2098df;
+	line-height: 60px;	
+	background-color: #1f9686;
 	text-align: center;
-	border-bottom: 1px solid #2098df;
+	border-bottom: 1px solid #1f9686;
 }
 .contact-details .detail-box h4 { 
 	font-size: 13px;
@@ -318,18 +320,20 @@ ul {
 	margin-bottom: 0;
 	line-height: 20px;
 }
-.contact-details .detail-box.phone-box {
-	background-color: #2098df;
+.contact-details .detail-box.phone-box {	
+	background-color: #4cb9aa;
 }
 .contact-details .detail-box.phone-box i {
-	background-color: #0f89d1;
+	/*background-color: #0f89d1;*/
+	background-color: #1f9686;
 	border-bottom-color: #fff;
 }
 .contact-details .detail-box.mail-box {
-	background-color: #0f89d1;
+	/*background-color: #0f89d1;*/
+	background-color: #4cb9aa;
 }
 .contact-details .detail-box.mail-box i {
-	background-color: #0779bc;
+	background-color: #1f9686;
 }
 
 /* -- Footer Widget */
@@ -452,7 +456,8 @@ ul {
 .footer-main .widget-newsletter .input-group span button {
 	height: 50px;
 	width: 100%;
-	background-color: #0f89d1;
+	/*background-color: #0f89d1;*/
+	background-color: #4cb9aa;
 	border-radius: 0;
 	border: none;
 	font-size: 25px;
@@ -634,7 +639,8 @@ ul {
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-	background-color: #0f89d1;
+	/*background-color: #0f89d1;*/
+	background-color: #4cb9aa;
 }
 .left-shape-blue {
 	overflow: hidden;
@@ -677,7 +683,8 @@ ul {
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-	background-color: #33a9ee;
+	/*background-color: #33a9ee;*/
+	background-color: #4cb9aa;
 }
 .right-shape-blue {
 	overflow: hidden;
@@ -705,7 +712,8 @@ ul {
 	background-position: right bottom;
 }
 .departments-banner .left-shape {
-	background-color: #33a9ee;
+	/*background-color: #33a9ee;*/
+	background-color: #4cb9aa;
 }
 .departments-banner .right-shape {
 	background-color: #fafafa;
@@ -773,6 +781,7 @@ _:-ms-input-placeholder, :root .banner-shape { display: none; }
 		font-size: 12px;
 	}
 }
+
 
 /* -- min-width: 319 to max-width: 767 */
 @media only screen and (min-width: 319px) and (max-width: 767px) {	
