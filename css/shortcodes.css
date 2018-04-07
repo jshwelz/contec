@@ -968,7 +968,7 @@
 	position: absolute;
 }
 .departments .panel-body {
-	padding-left: 165px;
+	/*padding-left: 165px;*/
 	padding-top: 0;
 	margin-bottom: 19px;
 }
