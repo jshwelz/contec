@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CryoCycle | Commercial Refrigerant Recovery, Recycling & Reclamation</title>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <link rel="canonical" href="https://contechs.co/" />
+  <title>CONTEC | Gestión Integral de Refrigerantes, Equipos RAC e Ingeniería</title>
   <style>
     :root {
       --bg: #f8fafc;
       --surface: #ffffff;
       --navy: #0f172a;
+      --navy-soft: #1e293b;
       --slate: #475569;
       --accent: #0284c7;
       --accent-dark: #0369a1;
+      --accent-light: #e0f2fe;
       --emerald: #059669;
       --border: #e2e8f0;
-      --radius: 12px;
+      --radius: 14px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
@@ -25,148 +30,358 @@
       line-height: 1.6;
     }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* Compliance Strip */
     .top-bar {
       background: var(--navy);
       color: #cbd5e1;
-      font-size: 0.8rem;
-      padding: 0.5rem 1.5rem;
+      font-size: 0.82rem;
+      padding: 0.55rem 1.5rem;
       text-align: center;
-      letter-spacing: 0.02em;
     }
-    .top-bar span { color: #38bdf8; font-weight: 600; }
+    .top-bar strong { color: #38bdf8; font-weight: 600; }
 
-    /* Header */
     header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(255, 255, 255, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
     .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 74px;
     }
-    .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
+    .logo {
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      text-decoration: none;
+    }
     .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--slate); font-weight: 500; font-size: 0.95rem; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--slate);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
     .nav-links a:hover { color: var(--navy); }
 
-    /* Buttons */
-    .btn {
-      display: inline-block; padding: 0.75rem 1.4rem; border-radius: 8px;
-      font-weight: 600; text-decoration: none; transition: 0.2s ease; cursor: pointer; border: none;
+    .lang-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg);
     }
-    .btn-primary { background: var(--accent); color: #fff; }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 0.4rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--slate);
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      background: var(--navy);
+      color: #ffffff;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.78rem 1.45rem;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn-primary { background: var(--accent); color: #ffffff; }
     .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
-    .btn-outline { background: var(--surface); color: var(--navy); border: 1px solid var(--border); }
+    .btn-outline { background: var(--surface); color: var(--navy); border-color: var(--border); }
     .btn-outline:hover { border-color: var(--navy); }
 
-    /* Hero */
-    .hero { padding: 5rem 0 4rem; }
+    .hero { padding: 4.5rem 0 3.5rem; }
     .badge {
-      display: inline-block; background: #e0f2fe; color: var(--accent-dark);
-      padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600;
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
       margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-size: clamp(2.25rem, 4.5vw, 3.6rem);
-      line-height: 1.12; letter-spacing: -0.03em; max-width: 820px; margin-bottom: 1.25rem;
+      font-size: clamp(2.15rem, 4.4vw, 3.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 860px;
+      margin-bottom: 1.25rem;
     }
     .hero p {
-      font-size: 1.15rem; color: var(--slate); max-width: 650px; margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: var(--slate);
+      max-width: 720px;
+      margin-bottom: 2rem;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-    .trust-metrics {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 3rem;
     }
-    .metric strong { display: block; font-size: 1.5rem; color: var(--navy); }
-    .metric span { font-size: 0.875rem; color: var(--slate); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+    }
+    .stat-card strong { display: block; font-size: 1.1rem; color: var(--navy); margin-bottom: 0.25rem; }
+    .stat-card span { font-size: 0.88rem; color: var(--slate); }
 
-    /* Bento 3 Rs Grid */
-    section { padding: 4.5rem 0; }
-    .section-header { margin-bottom: 2.5rem; }
-    .section-header h2 { font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .section-header p { color: var(--slate); max-width: 600px; }
+    section { padding: 4.25rem 0; }
+    .section-header { margin-bottom: 2.25rem; }
+    .section-header h2 {
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .section-header p { color: var(--slate); max-width: 700px; }
 
-    .bento-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.4rem;
     }
     .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 2rem; transition: 0.2s ease;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.85rem;
+      display: flex;
+      flex-direction: column;
+      transition: 0.2s ease;
     }
-    .card:hover { border-color: var(--accent); box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.08); }
-    .card-tag { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; }
-    .card h3 { font-size: 1.35rem; margin: 0.5rem 0 0.75rem; }
-    .card p { color: var(--slate); font-size: 0.95rem; margin-bottom: 1.25rem; }
-    .card ul { list-style: none; font-size: 0.9rem; color: var(--navy); }
-    .card li { padding: 0.35rem 0; border-top: 1px solid #f1f5f9; }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px -12px rgba(15, 23, 42, 0.1);
+    }
+    .card-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .card h3 { font-size: 1.25rem; margin: 0.45rem 0 0.7rem; }
+    .card p { color: var(--slate); font-size: 0.94rem; margin-bottom: 1.1rem; }
+    .card ul {
+      list-style: none;
+      margin-top: auto;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--navy);
+    }
+    .card li { padding: 0.32rem 0; }
+    .card li::before { content: "• "; color: var(--accent); font-weight: 700; }
 
-    /* Gas Pills */
-    .gas-panel {
-      background: var(--navy); color: #fff; border-radius: var(--radius); padding: 2.5rem;
+    .value-panel {
+      background: var(--navy);
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
+      align-items: start;
     }
-    .gas-list { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.5rem; }
-    .gas-pill {
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
-      padding: 0.45rem 0.9rem; border-radius: 6px; font-size: 0.9rem; color: #38bdf8;
+    .value-panel h2 { font-size: 1.85rem; margin-bottom: 0.85rem; }
+    .value-panel p { color: #cbd5e1; margin-bottom: 1rem; font-size: 0.96rem; }
+    .value-list { list-style: none; display: grid; gap: 0.65rem; }
+    .value-list li {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 0.92rem;
+      color: #e2e8f0;
     }
+    .value-panel .badge { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; }
 
-    /* Quote Form */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.4rem;
+    }
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .photo-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      background: #e2e8f0;
+    }
+    .photo-caption { padding: 1.1rem 1.25rem; }
+    .photo-caption strong { display: block; font-size: 1rem; margin-bottom: 0.25rem; }
+    .photo-caption span { font-size: 0.88rem; color: var(--slate); }
+
     .quote-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 2.5rem;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
     }
-    form { display: grid; gap: 1rem; }
+    .contact-lines { margin-top: 1.25rem; display: grid; gap: 0.35rem; }
+    .contact-lines a { color: var(--accent-dark); font-weight: 600; text-decoration: none; }
+    .contact-lines a:hover { text-decoration: underline; }
+    form { display: grid; gap: 0.95rem; }
     input, select, textarea {
-      width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border);
-      border-radius: 8px; font: inherit; font-size: 0.95rem;
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      font-size: 0.95rem;
+      color: var(--navy);
+      background: #ffffff;
     }
-    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      border-color: transparent;
+    }
+    .form-status {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--emerald);
+      min-height: 1.25rem;
+    }
+    .form-status.error { color: #b91c1c; }
+    .hp {
+      position: absolute;
+      left: -9999px;
+      height: 0;
+      width: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     footer {
-      border-top: 1px solid var(--border); padding: 2.5rem 0; color: var(--slate); font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      padding: 2.25rem 0;
+      color: var(--slate);
+      font-size: 0.88rem;
     }
-    @media (max-width: 768px) { .nav-links a:not(.btn) { display: none; } }
+
+    @media (max-width: 820px) {
+      .nav {
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0.7rem 0;
+        row-gap: 0.65rem;
+      }
+      .nav-links a:not(.btn) { display: none; }
+      .nav-links { gap: 0; }
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.55rem;
+      }
+      .logo { font-size: 1.2rem; }
+      .nav .btn {
+        padding: 0.55rem 0.75rem;
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="top-bar">
-    <span>EPA Section 608 Certified</span> · AHRI-700 Purity Reclamation · Full Chain-of-Custody Documentation
+    <strong data-i18n="top_badge">GESTIÓN INTEGRAL RAC Y REFRIGERANTES</strong>
+    <span data-i18n="top_text"> · Recuperación, reciclaje, regeneración y disposición responsable de equipos</span>
   </div>
 
   <header>
     <div class="container nav">
-      <div class="logo">CRYO<span>CYCLE</span></div>
-      <nav class="nav-links">
-        <a href="#services">The 3 Rs</a>
-        <a href="#refrigerants">Accepted Gases</a>
-        <a href="#quote" class="btn btn-primary">Request Pickup</a>
-      </nav>
+      <a href="#top" class="logo">CON<span>TEC</span></a>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#services" data-i18n="nav_services">Servicios</a>
+          <a href="#value" data-i18n="nav_value">Propuesta de Valor</a>
+          <a href="#gallery" data-i18n="nav_gallery">Operaciones</a>
+          <a href="#contact" class="btn btn-primary" data-i18n="nav_cta">Solicitar Cotización</a>
+        </nav>
+        <div class="lang-toggle" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang="es" onclick="applyLanguage('es')">ES</button>
+          <button type="button" class="lang-btn" data-lang="en" onclick="applyLanguage('en')">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="container">
-        <span class="badge mono">B2B REFRIGERANT MANAGEMENT</span>
-        <h1>Compliant Refrigerant Recovery, Recycling &amp; Reclamation.</h1>
-        <p>Turn recovered gas into compliant documentation or immediate rebate value. We serve commercial HVAC contractors, chiller plants, and industrial facilities with rapid cylinder swaps and certified AHRI-700 processing.</p>
+        <span class="badge mono" data-i18n="hero_badge">REFRIGERACIÓN · SUSTANCIAS REFRIGERANTES · INGENIERÍA</span>
+        <h1 data-i18n="hero_title">Gestión integral de equipos frigoríficos, refrigerantes e ingeniería industrial.</h1>
+        <p data-i18n="hero_subtitle">En CONTEC brindamos soluciones técnicas y ambientalmente responsables para la recuperación, reciclaje, regeneración y manejo de sustancias refrigerantes, disposición de equipos en desuso y servicios de refrigeración industrial y comercial.</p>
         <div class="hero-actions">
-          <a href="#quote" class="btn btn-primary">Schedule Cylinder Pickup</a>
-          <a href="#refrigerants" class="btn btn-outline">View Accepted Refrigerants</a>
+          <a href="#contact" class="btn btn-primary" data-i18n="hero_cta_primary">Solicitar Evaluación o Cotización</a>
+          <a href="#services" class="btn btn-outline" data-i18n="hero_cta_secondary">Ver Áreas de Servicio</a>
         </div>
-        <div class="trust-metrics">
-          <div class="metric"><strong class="mono">AHRI-700</strong><span>Certified Purity Standard</span></div>
-          <div class="metric"><strong class="mono">48-Hr</strong><span>Cylinder Exchange Turnaround</span></div>
-          <div class="metric"><strong class="mono">100%</strong><span>Audit-Ready EPA Manifests</span></div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong data-i18n="stat_1_title">Un Solo Aliado Integral</strong>
+            <span data-i18n="stat_1_desc">Recolección, transporte, recuperación, acopio, tratamiento y disposición final.</span>
+          </div>
+          <div class="stat-card">
+            <strong data-i18n="stat_2_title">Plantel e Infraestructura</strong>
+            <span data-i18n="stat_2_desc">Personal técnico especializado y plantel destinado a gestión y tratamiento RAC.</span>
+          </div>
+          <div class="stat-card">
+            <strong data-i18n="stat_3_title">Prevención de Emisiones</strong>
+            <span data-i18n="stat_3_desc">Manejo responsable de SAO y refrigerantes, con recuperación de materiales.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -174,83 +389,384 @@
     <section id="services">
       <div class="container">
         <div class="section-header">
-          <h2>Complete Lifecycle Management: The 3 Rs</h2>
-          <p>End-to-end handling built to keep your technicians on the job and your compliance records bulletproof.</p>
+          <h2 data-i18n="services_title">Nuestros Principales Servicios</h2>
+          <p data-i18n="services_subtitle">Capacidades técnicas e infraestructura centralizadas para respaldar operaciones comerciales e industriales.</p>
         </div>
-        <div class="bento-grid">
+
+        <div class="services-grid">
           <article class="card">
-            <span class="card-tag mono">01 / Recovery</span>
-            <h3>On-Site Evacuation &amp; Cylinders</h3>
-            <p>High-speed recovery support for large commercial chillers, supermarket racks, and system decommissions.</p>
+            <span class="card-tag mono" data-i18n="s1_tag">01 / Refrigerantes</span>
+            <h3 data-i18n="s1_title">Gestión Integral de Sustancias Refrigerantes</h3>
+            <p data-i18n="s1_desc">Evitamos la liberación de gases a la atmósfera mediante procesos controlados de recuperación, custodia y acondicionamiento.</p>
             <ul>
-              <li>DOT-certified recovery cylinders supplied</li>
-              <li>High-capacity recovery units for bulk jobs</li>
-              <li>Zero venting, zero regulatory exposure</li>
+              <li data-i18n="s1_i1">Recuperación de gases refrigerantes</li>
+              <li data-i18n="s1_i2">Reciclaje y regeneración de refrigerantes</li>
+              <li data-i18n="s1_i3">Recolección, transporte, acopio y custodia</li>
+              <li data-i18n="s1_i4">Manejo de sustancias agotadoras de la capa de ozono (SAO) y otros refrigerantes</li>
             </ul>
           </article>
+
           <article class="card">
-            <span class="card-tag mono">02 / Recycling</span>
-            <h3>Filtration &amp; Reuse Prep</h3>
-            <p>Remove oil, acid, particulates, and moisture so refrigerants can be safely recharged into your own equipment.</p>
+            <span class="card-tag mono" data-i18n="s2_tag">02 / Equipos Frigoríficos</span>
+            <h3 data-i18n="s2_title">Gestión y Disposición de Equipos Frigoríficos</h3>
+            <p data-i18n="s2_desc">Plantel especializado para recepción, evaluación y tratamiento ambientalmente viable de equipos RAC fuera de servicio.</p>
             <ul>
-              <li>Multi-stage oil &amp; moisture separation</li>
-              <li>Extends operational life of legacy systems</li>
-              <li>Reduces virgin refrigerant purchasing costs</li>
+              <li data-i18n="s2_i1">Recolección, transporte, recepción, acopio y almacenamiento</li>
+              <li data-i18n="s2_i2">Evaluación técnica, recuperación de refrigerantes y desagregación</li>
+              <li data-i18n="s2_i3">Separación y recuperación de componentes y materiales aprovechables</li>
+              <li data-i18n="s2_i4">Conversión, reconversión y reconstrucción según viabilidad técnica</li>
             </ul>
           </article>
+
           <article class="card">
-            <span class="card-tag mono">03 / Reclamation</span>
-            <h3>AHRI-700 Distillation &amp; Buyback</h3>
-            <p>Full chemical reprocessing back to virgin factory specifications with competitive buyback credits for clean gas.</p>
+            <span class="card-tag mono" data-i18n="s3_tag">03 / Refrigeración y Climatización</span>
+            <h3 data-i18n="s3_title">Refrigeración Industrial y Comercial</h3>
+            <p data-i18n="s3_desc">Instalación, mantenimiento preventivo y correctivo para sistemas críticos de frío y climatización.</p>
             <ul>
-              <li>Gas chromatography lab verification</li>
-              <li>Official EPA reclamation certificates issued</li>
-              <li>Cash payout or cylinder credit options</li>
+              <li data-i18n="s3_i1">Sistemas industriales, comerciales y domésticos, incluyendo amoníaco (NH3)</li>
+              <li data-i18n="s3_i2">Sistemas de agua fría (Chillers), expansión directa y VRF</li>
+              <li data-i18n="s3_i3">Diseño y fabricación de ductería e intercambiadores de casco y tubo</li>
+              <li data-i18n="s3_i4">Mantenimiento preventivo y correctivo de equipos RAC</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card-tag mono" data-i18n="s4_tag">04 / Ingeniería</span>
+            <h3 data-i18n="s4_title">Ingeniería Mecánica, Industrial y Electromecánica</h3>
+            <p data-i18n="s4_desc">Soporte especializado en estructuras, tuberías, montajes y sistemas eléctricos para plantas y comercios.</p>
+            <ul>
+              <li data-i18n="s4_i1">Soldadura TIG, argón y eléctrica</li>
+              <li data-i18n="s4_i2">Fabricación y reparación de estructuras metálicas, tanques y maquinaria</li>
+              <li data-i18n="s4_i3">Tuberías industriales, transporte de fluidos y montajes electromecánicos</li>
+              <li data-i18n="s4_i4">Electricidad industrial y comercial y mantenimiento eléctrico/mecánico</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="refrigerants">
+    <section id="value">
       <div class="container">
-        <div class="gas-panel">
-          <h2>Accepted Refrigerants</h2>
-          <p style="color:#cbd5e1; margin-top:0.5rem;">We process CFCs, HCFCs, HFCs, and next-generation HFO blends. Keep gases unmixed for maximum buyback value.</p>
-          <div class="gas-list mono">
-            <span class="gas-pill">R-22</span>
-            <span class="gas-pill">R-410A</span>
-            <span class="gas-pill">R-134a</span>
-            <span class="gas-pill">R-404A</span>
-            <span class="gas-pill">R-407C</span>
-            <span class="gas-pill">R-507</span>
-            <span class="gas-pill">R-123</span>
-            <span class="gas-pill">R-1234yf</span>
-            <span class="gas-pill">R-513A</span>
+        <div class="value-panel">
+          <div>
+            <span class="badge mono" data-i18n="vp_badge">NUESTRA PROPUESTA DE VALOR</span>
+            <h2 data-i18n="vp_title">Un aliado estratégico para la gestión responsable de sus activos RAC.</h2>
+            <p data-i18n="vp_p1">En CONTEC buscamos convertirnos en un aliado estratégico para las empresas que requieren soluciones confiables en la gestión de sus equipos frigoríficos, sustancias refrigerantes y operaciones industriales.</p>
+            <p data-i18n="vp_p2">Centralizamos en un solo proveedor la recolección, transporte, recuperación, almacenamiento, tratamiento y gestión de equipos fuera de servicio, adaptándonos a las necesidades de cada cliente.</p>
           </div>
+          <ul class="value-list">
+            <li data-i18n="vp_l1"><strong>Buenas prácticas ambientales:</strong> Prevención activa de emisiones de refrigerantes a la atmósfera.</li>
+            <li data-i18n="vp_l2"><strong>Aprovechamiento responsable:</strong> Separación de materiales aprovechables y reconstrucción o reconversión cuando es viable.</li>
+            <li data-i18n="vp_l3"><strong>Continuidad operativa:</strong> Respuesta técnica integral en refrigeración industrial, comercial y electromecánica.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="quote">
+    <section id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="gal_title">Trabajo en Campo e Infraestructura</h2>
+          <p data-i18n="gal_subtitle">Registros reales de intervención técnica en sistemas de refrigeración y equipos industriales.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="photo-card">
+            <img src="assets/img/ammonia-piping.jpg" alt="Tuberías de amoníaco y enchaquetado" data-i18n-alt="gal_1_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_1_title">Tuberías y Sistemas de Amoníaco</strong>
+              <span data-i18n="gal_1_desc">Enchaquetado y montajes industriales en planta.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/bitzer-rack.jpg" alt="Servicio a compresor Bitzer en rack R-507" data-i18n-alt="gal_2_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_2_title">Servicio en Rack R507 y Compresores</strong>
+              <span data-i18n="gal_2_desc">Intervención técnica especializada en sistemas para cuartos fríos.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/evaporative-condenser.jpg" alt="Mantenimiento de condensador evaporativo y aspas" data-i18n-alt="gal_3_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_3_title">Condensadores Evaporativos y Equipos Mayores</strong>
+              <span data-i18n="gal_3_desc">Reparación, aspas y mantenimiento de equipos de alta capacidad.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/ammonia-plant.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/ammonia-vessel.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/compressor-service.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/bitzer-service.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/compressor-holding.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/cooling-tower.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/condenser-fan.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/condenser-housing.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/chiller-service.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/condensing-unit.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/evaporator-coils.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/panel-scrap.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/disassembly-panels.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/equipment-scrap.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/solar-field.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/cable-trays.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/electrical-panel.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-01.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-02.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-03.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-04.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-05.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-06.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-07.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-08.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-09.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-10.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-11.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-12.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-13.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-14.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-15.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-16.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-17.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/img/field-18.jpg" alt="Operación en campo CONTEC" data-i18n-alt="gal_more_alt" />
+            <figcaption class="photo-caption">
+              <strong data-i18n="gal_more_title">Operaciones en campo</strong>
+              <span data-i18n="gal_more_desc">Registro de refrigeración, disposición de equipos e instalaciones.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
       <div class="container">
         <div class="quote-box">
           <div>
-            <h2>Schedule a Pickup or Buyback Quote</h2>
-            <p style="color:var(--slate); margin:0.75rem 0 1.5rem;">Tell us what refrigerant and cylinder volume you have on hand. Our dispatch team responds within 2 business hours.</p>
-            <p style="font-size:0.9rem; color:var(--slate);"><strong>Tip:</strong> Separating refrigerant types by cylinder guarantees top-tier buyback pricing and avoids mixed-gas separation fees.</p>
+            <h2 data-i18n="form_title">Solicite Información o Cotización</h2>
+            <p style="color:var(--slate); margin:0.75rem 0 1rem;" data-i18n="form_desc">Cuéntenos qué tipo de refrigerante, equipo RAC o requerimiento industrial necesita gestionar y nuestro equipo se pondrá en contacto.</p>
+            <p style="font-size:0.9rem; color:var(--slate);" data-i18n="form_note">Atención enfocada en empresas comerciales, plantas industriales y gestores de infraestructura.</p>
+            <div class="contact-lines">
+              <a href="tel:+50498114628">(+504) 9811-4628</a>
+              <a href="mailto:contecwn@gmail.com">contecwn@gmail.com</a>
+            </div>
           </div>
-          <form>
-            <input type="text" placeholder="Company / Contractor Name" required />
-            <input type="email" placeholder="Work Email" required />
-            <select required>
-              <option value="">Select Primary Service...</option>
-              <option>Refrigerant Buyback / Reclamation</option>
-              <option>On-Site Commercial Recovery</option>
-              <option>Cylinder Swap / Drop-Off</option>
+          <form id="quote-form" action="https://formspree.io/contecwn@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Solicitud de cotización CONTEC" />
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="text" name="company" data-i18n-placeholder="ph_company" placeholder="Empresa y Nombre de Contacto" required />
+            <input type="email" name="email" data-i18n-placeholder="ph_email" placeholder="Correo electrónico" required />
+            <select name="service" required>
+              <option value="" data-i18n="opt_default">Seleccione el área de servicio...</option>
+              <option value="refrigerants" data-i18n="opt_1">Gestión Integral de Sustancias Refrigerantes</option>
+              <option value="equipment" data-i18n="opt_2">Gestión y Disposición de Equipos Frigoríficos</option>
+              <option value="rac" data-i18n="opt_3">Refrigeración Industrial y Comercial</option>
+              <option value="engineering" data-i18n="opt_4">Ingeniería Mecánica, Industrial y Electromecánica</option>
             </select>
-            <input type="text" placeholder="Refrigerant Type(s) & Est. Weight (e.g., 300 lbs R-410A)" />
-            <button type="submit" class="btn btn-primary">Request Quote &amp; Manifest</button>
+            <textarea name="details" rows="3" data-i18n-placeholder="ph_details" placeholder="Detalles del equipo, refrigerante o alcance requerido..."></textarea>
+            <button type="submit" class="btn btn-primary" data-i18n="form_submit">Enviar Solicitud</button>
+            <div class="form-status" id="form-status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -259,9 +775,264 @@
 
   <footer>
     <div class="container">
-      © 2026 CryoCycle Refrigerant Management. EPA Section 608 &amp; AHRI-700 Compliant Operations.
+      <span data-i18n="footer_text">© 2026 CONTEC. Gestión integral de refrigerantes, equipos frigoríficos e ingeniería.</span>
     </div>
   </footer>
 
+  <script>
+    const translations = {
+      es: {
+        page_title: "CONTEC | Gestión Integral de Refrigerantes, Equipos RAC e Ingeniería",
+        top_badge: "GESTIÓN INTEGRAL RAC Y REFRIGERANTES",
+        top_text: " · Recuperación, reciclaje, regeneración y disposición responsable de equipos",
+        nav_services: "Servicios",
+        nav_value: "Propuesta de Valor",
+        nav_gallery: "Operaciones",
+        nav_cta: "Solicitar Cotización",
+        hero_badge: "REFRIGERACIÓN · SUSTANCIAS REFRIGERANTES · INGENIERÍA",
+        hero_title: "Gestión integral de equipos frigoríficos, refrigerantes e ingeniería industrial.",
+        hero_subtitle: "En CONTEC brindamos soluciones técnicas y ambientalmente responsables para la recuperación, reciclaje, regeneración y manejo de sustancias refrigerantes, disposición de equipos en desuso y servicios de refrigeración industrial y comercial.",
+        hero_cta_primary: "Solicitar Evaluación o Cotización",
+        hero_cta_secondary: "Ver Áreas de Servicio",
+        stat_1_title: "Un Solo Aliado Integral",
+        stat_1_desc: "Recolección, transporte, recuperación, acopio, tratamiento y disposición final.",
+        stat_2_title: "Plantel e Infraestructura",
+        stat_2_desc: "Personal técnico especializado y plantel destinado a gestión y tratamiento RAC.",
+        stat_3_title: "Prevención de Emisiones",
+        stat_3_desc: "Manejo responsable de SAO y refrigerantes, con recuperación de materiales.",
+        services_title: "Nuestros Principales Servicios",
+        services_subtitle: "Capacidades técnicas e infraestructura centralizadas para respaldar operaciones comerciales e industriales.",
+        s1_tag: "01 / Refrigerantes",
+        s1_title: "Gestión Integral de Sustancias Refrigerantes",
+        s1_desc: "Evitamos la liberación de gases a la atmósfera mediante procesos controlados de recuperación, custodia y acondicionamiento.",
+        s1_i1: "Recuperación de gases refrigerantes",
+        s1_i2: "Reciclaje y regeneración de refrigerantes",
+        s1_i3: "Recolección, transporte, acopio y custodia",
+        s1_i4: "Manejo de sustancias agotadoras de la capa de ozono (SAO) y otros refrigerantes",
+        s2_tag: "02 / Equipos Frigoríficos",
+        s2_title: "Gestión y Disposición de Equipos Frigoríficos",
+        s2_desc: "Plantel especializado para recepción, evaluación y tratamiento ambientalmente viable de equipos RAC fuera de servicio.",
+        s2_i1: "Recolección, transporte, recepción, acopio y almacenamiento",
+        s2_i2: "Evaluación técnica, recuperación de refrigerantes y desagregación",
+        s2_i3: "Separación y recuperación de componentes y materiales aprovechables",
+        s2_i4: "Conversión, reconversión y reconstrucción según viabilidad técnica",
+        s3_tag: "03 / Refrigeración y Climatización",
+        s3_title: "Refrigeración Industrial y Comercial",
+        s3_desc: "Instalación, mantenimiento preventivo y correctivo para sistemas críticos de frío y climatización.",
+        s3_i1: "Sistemas industriales, comerciales y domésticos, incluyendo amoníaco (NH3)",
+        s3_i2: "Sistemas de agua fría (Chillers), expansión directa y VRF",
+        s3_i3: "Diseño y fabricación de ductería e intercambiadores de casco y tubo",
+        s3_i4: "Mantenimiento preventivo y correctivo de equipos RAC",
+        s4_tag: "04 / Ingeniería",
+        s4_title: "Ingeniería Mecánica, Industrial y Electromecánica",
+        s4_desc: "Soporte especializado en estructuras, tuberías, montajes y sistemas eléctricos para plantas y comercios.",
+        s4_i1: "Soldadura TIG, argón y eléctrica",
+        s4_i2: "Fabricación y reparación de estructuras metálicas, tanques y maquinaria",
+        s4_i3: "Tuberías industriales, transporte de fluidos y montajes electromecánicos",
+        s4_i4: "Electricidad industrial y comercial y mantenimiento eléctrico/mecánico",
+        vp_badge: "NUESTRA PROPUESTA DE VALOR",
+        vp_title: "Un aliado estratégico para la gestión responsable de sus activos RAC.",
+        vp_p1: "En CONTEC buscamos convertirnos en un aliado estratégico para las empresas que requieren soluciones confiables en la gestión de sus equipos frigoríficos, sustancias refrigerantes y operaciones industriales.",
+        vp_p2: "Centralizamos en un solo proveedor la recolección, transporte, recuperación, almacenamiento, tratamiento y gestión de equipos fuera de servicio, adaptándonos a las necesidades de cada cliente.",
+        vp_l1: "<strong>Buenas prácticas ambientales:</strong> Prevención activa de emisiones de refrigerantes a la atmósfera.",
+        vp_l2: "<strong>Aprovechamiento responsable:</strong> Separación de materiales aprovechables y reconstrucción o reconversión cuando es viable.",
+        vp_l3: "<strong>Continuidad operativa:</strong> Respuesta técnica integral en refrigeración industrial, comercial y electromecánica.",
+        gal_title: "Trabajo en Campo e Infraestructura",
+        gal_subtitle: "Registros reales de intervención técnica en sistemas de refrigeración y equipos industriales.",
+        gal_1_alt: "Tuberías de amoníaco y enchaquetado",
+        gal_1_title: "Tuberías y Sistemas de Amoníaco",
+        gal_1_desc: "Enchaquetado y montajes industriales en planta.",
+        gal_2_alt: "Servicio a compresor Bitzer en rack R-507",
+        gal_2_title: "Servicio en Rack R507 y Compresores",
+        gal_2_desc: "Intervención técnica especializada en sistemas para cuartos fríos.",
+        gal_3_alt: "Mantenimiento de condensador evaporativo y aspas",
+        gal_3_title: "Condensadores Evaporativos y Equipos Mayores",
+        gal_3_desc: "Reparación, aspas y mantenimiento de equipos de alta capacidad.",
+        gal_more_alt: "Operación en campo CONTEC",
+        gal_more_title: "Operaciones en campo",
+        gal_more_desc: "Registro de refrigeración, disposición de equipos e instalaciones.",
+        form_title: "Solicite Información o Cotización",
+        form_desc: "Cuéntenos qué tipo de refrigerante, equipo RAC o requerimiento industrial necesita gestionar y nuestro equipo se pondrá en contacto.",
+        form_note: "Atención enfocada en empresas comerciales, plantas industriales y gestores de infraestructura.",
+        ph_company: "Empresa y Nombre de Contacto",
+        ph_email: "Correo electrónico",
+        ph_details: "Detalles del equipo, refrigerante o alcance requerido...",
+        opt_default: "Seleccione el área de servicio...",
+        opt_1: "Gestión Integral de Sustancias Refrigerantes",
+        opt_2: "Gestión y Disposición de Equipos Frigoríficos",
+        opt_3: "Refrigeración Industrial y Comercial",
+        opt_4: "Ingeniería Mecánica, Industrial y Electromecánica",
+        form_submit: "Enviar Solicitud",
+        form_status: "Solicitud enviada. Le contactaremos pronto.",
+        form_sending: "Enviando solicitud...",
+        form_error: "No se pudo enviar la solicitud. Intente de nuevo o escriba a contecwn@gmail.com.",
+        footer_text: "© 2026 CONTEC. Gestión integral de refrigerantes, equipos frigoríficos e ingeniería."
+      },
+      en: {
+        page_title: "CONTEC | Integrated Refrigerant, RAC Equipment and Engineering Management",
+        top_badge: "INTEGRATED RAC AND REFRIGERANT MANAGEMENT",
+        top_text: " · Recovery, recycling, reclamation and responsible equipment disposal",
+        nav_services: "Services",
+        nav_value: "Value Proposition",
+        nav_gallery: "Operations",
+        nav_cta: "Request a Quote",
+        hero_badge: "REFRIGERATION · REFRIGERANTS · ENGINEERING",
+        hero_title: "Integrated management of refrigeration equipment, refrigerants and industrial engineering.",
+        hero_subtitle: "CONTEC provides technically sound and environmentally responsible solutions for refrigerant recovery, recycling and reclamation, disposal of retired equipment, and industrial and commercial refrigeration services.",
+        hero_cta_primary: "Request an Assessment or Quote",
+        hero_cta_secondary: "View Service Areas",
+        stat_1_title: "One Integrated Partner",
+        stat_1_desc: "Collection, transport, recovery, storage, treatment and final disposal.",
+        stat_2_title: "Crew and Infrastructure",
+        stat_2_desc: "Specialized technicians and a facility dedicated to RAC management and treatment.",
+        stat_3_title: "Emission Prevention",
+        stat_3_desc: "Responsible handling of ODS and refrigerants, with material recovery.",
+        services_title: "Our Main Services",
+        services_subtitle: "Centralized technical capacity and infrastructure for commercial and industrial operations.",
+        s1_tag: "01 / Refrigerants",
+        s1_title: "Integrated Refrigerant Management",
+        s1_desc: "We keep gases out of the atmosphere through controlled recovery, custody and conditioning.",
+        s1_i1: "Refrigerant gas recovery",
+        s1_i2: "Refrigerant recycling and reclamation",
+        s1_i3: "Collection, transport, storage and custody",
+        s1_i4: "Handling of ozone-depleting substances (ODS) and other refrigerants",
+        s2_tag: "02 / Refrigeration Equipment",
+        s2_title: "Refrigeration Equipment Management and Disposal",
+        s2_desc: "A specialized facility for receiving, assessing and environmentally sound treatment of retired RAC equipment.",
+        s2_i1: "Collection, transport, receiving, storage and warehousing",
+        s2_i2: "Technical assessment, refrigerant recovery and disassembly",
+        s2_i3: "Separation and recovery of reusable components and materials",
+        s2_i4: "Conversion, retrofit and rebuild when technically viable",
+        s3_tag: "03 / Refrigeration and HVAC",
+        s3_title: "Industrial and Commercial Refrigeration",
+        s3_desc: "Installation plus preventive and corrective maintenance for critical cooling and air-conditioning systems.",
+        s3_i1: "Industrial, commercial and domestic systems, including ammonia (NH3)",
+        s3_i2: "Chilled-water systems (chillers), direct expansion and VRF",
+        s3_i3: "Ductwork design and fabrication, and shell-and-tube heat exchangers",
+        s3_i4: "Preventive and corrective maintenance of RAC equipment",
+        s4_tag: "04 / Engineering",
+        s4_title: "Mechanical, Industrial and Electromechanical Engineering",
+        s4_desc: "Specialized support for structures, piping, installations and electrical systems in plants and commercial sites.",
+        s4_i1: "TIG, argon and arc welding",
+        s4_i2: "Fabrication and repair of metal structures, tanks and machinery",
+        s4_i3: "Industrial piping, fluid transport and electromechanical installation",
+        s4_i4: "Industrial and commercial electrical work, plus electrical and mechanical maintenance",
+        vp_badge: "OUR VALUE PROPOSITION",
+        vp_title: "A strategic partner for responsible management of your RAC assets.",
+        vp_p1: "CONTEC aims to be a strategic partner for companies that need reliable solutions for refrigeration equipment, refrigerants and industrial operations.",
+        vp_p2: "We bring collection, transport, recovery, storage, treatment and end-of-life equipment management together in one provider, adapted to each client.",
+        vp_l1: "<strong>Sound environmental practice:</strong> Active prevention of refrigerant emissions to the atmosphere.",
+        vp_l2: "<strong>Responsible recovery:</strong> Separation of reusable materials, and rebuild or retrofit when it is viable.",
+        vp_l3: "<strong>Operational continuity:</strong> Full technical response in industrial refrigeration, commercial refrigeration and electromechanical work.",
+        gal_title: "Field Work and Infrastructure",
+        gal_subtitle: "Real records of technical work on refrigeration systems and industrial equipment.",
+        gal_1_alt: "Ammonia piping and blue cladding",
+        gal_1_title: "Ammonia Piping and Systems",
+        gal_1_desc: "Industrial cladding and plant installation.",
+        gal_2_alt: "Bitzer compressor service on an R-507 cold-room rack",
+        gal_2_title: "R-507 Rack and Compressor Service",
+        gal_2_desc: "Specialized technical work on cold-room systems.",
+        gal_3_alt: "Evaporative condenser maintenance and fan assembly",
+        gal_3_title: "Evaporative Condensers and Major Equipment",
+        gal_3_desc: "Repair, fan blades and maintenance of high-capacity equipment.",
+        gal_more_alt: "CONTEC field operation",
+        gal_more_title: "Field Operations",
+        gal_more_desc: "Refrigeration work, equipment disposal and installations.",
+        form_title: "Request Information or a Quote",
+        form_desc: "Tell us which refrigerant, RAC equipment or industrial requirement you need to manage, and our team will get in touch.",
+        form_note: "Focused on commercial companies, industrial plants and infrastructure managers.",
+        ph_company: "Company and contact name",
+        ph_email: "Email address",
+        ph_details: "Equipment, refrigerant or scope details...",
+        opt_default: "Select a service area...",
+        opt_1: "Integrated Refrigerant Management",
+        opt_2: "Refrigeration Equipment Management and Disposal",
+        opt_3: "Industrial and Commercial Refrigeration",
+        opt_4: "Mechanical, Industrial and Electromechanical Engineering",
+        form_submit: "Send Request",
+        form_status: "Request sent. We will contact you soon.",
+        form_sending: "Sending request...",
+        form_error: "The request could not be sent. Try again or email contecwn@gmail.com.",
+        footer_text: "© 2026 CONTEC. Integrated management of refrigerants, refrigeration equipment and engineering."
+      }
+    };
+
+    const htmlKeys = new Set(["vp_l1", "vp_l2", "vp_l3"]);
+
+    function applyLanguage(lang) {
+      const copy = translations[lang] || translations.es;
+      document.documentElement.lang = lang;
+      document.title = copy.page_title;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (!copy[key]) return;
+        if (htmlKeys.has(key)) el.innerHTML = copy[key];
+        else el.textContent = copy[key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (copy[key]) el.placeholder = copy[key];
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-alt");
+        if (copy[key]) el.alt = copy[key];
+      });
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+        btn.setAttribute("aria-pressed", btn.dataset.lang === lang ? "true" : "false");
+      });
+      try { localStorage.setItem("contec-lang", lang); } catch (err) {}
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+    });
+
+    document.getElementById("quote-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const lang = document.documentElement.lang === "en" ? "en" : "es";
+      const copy = translations[lang];
+      const status = document.getElementById("form-status");
+      const button = form.querySelector("[type=submit]");
+      if (form.elements._gotcha.value) {
+        status.classList.remove("error");
+        status.textContent = copy.form_status;
+        form.reset();
+        return;
+      }
+      const data = new FormData(form);
+      const serviceSelect = form.querySelector("[name=service]");
+      data.set("service", serviceSelect.options[serviceSelect.selectedIndex].textContent);
+      data.set("_subject", lang === "en" ? "CONTEC quote request" : "Solicitud de cotización CONTEC");
+      status.classList.remove("error");
+      status.textContent = copy.form_sending;
+      button.disabled = true;
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" }
+        });
+        if (response.ok) {
+          status.textContent = copy.form_status;
+          form.reset();
+        } else {
+          status.classList.add("error");
+          status.textContent = copy.form_error;
+        }
+      } catch (err) {
+        status.classList.add("error");
+        status.textContent = copy.form_error;
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    let saved = "es";
+    try { saved = localStorage.getItem("contec-lang") || "es"; } catch (err) {}
+    window.applyLanguage = applyLanguage;
+    if (saved === "en") applyLanguage("en");
+  </script>
 </body>
 </html>
