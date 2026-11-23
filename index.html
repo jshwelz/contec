@@ -75,13 +75,30 @@
       align-items: center;
       gap: 1.5rem;
     }
-    .nav-links a {
+    .nav-links a:not(.btn) {
       text-decoration: none;
       color: var(--slate);
       font-weight: 500;
       font-size: 0.95rem;
     }
-    .nav-links a:hover { color: var(--navy); }
+    .nav-links a:not(.btn):hover { color: var(--navy); }
+    .nav-links a.btn-primary,
+    .nav-links a.btn-primary:hover { color: #ffffff; }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--navy);
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
     .lang-toggle {
       display: inline-flex;
@@ -303,32 +320,54 @@
       pointer-events: none;
     }
 
+    .contact-address { color: var(--slate); font-size: 0.92rem; margin-bottom: 0.85rem; }
     footer {
       border-top: 1px solid var(--border);
       padding: 2.25rem 0;
       color: var(--slate);
       font-size: 0.88rem;
     }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .footer-contact {
+      display: grid;
+      gap: 0.35rem;
+      font-style: normal;
+    }
+    .footer-contact strong { color: var(--navy); }
+    .footer-contact a { color: var(--accent-dark); font-weight: 600; text-decoration: none; }
+    .footer-contact a:hover { text-decoration: underline; }
 
     @media (max-width: 820px) {
-      .nav {
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 0.7rem 0;
-        row-gap: 0.65rem;
-      }
-      .nav-links a:not(.btn) { display: none; }
-      .nav-links { gap: 0; }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-        gap: 0.55rem;
-      }
+      .menu-toggle { display: inline-flex; }
+      .nav { position: relative; }
+      .nav-right { margin-left: auto; gap: 0.55rem; }
       .logo { font-size: 1.2rem; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 1.5rem 1rem;
+        box-shadow: 0 16px 30px -20px rgba(15, 23, 42, 0.35);
+      }
+      .nav-links.is-open { display: flex; }
+      .nav-links a:not(.btn) { display: block; padding: 0.7rem 0; }
       .nav .btn {
-        padding: 0.55rem 0.75rem;
-        font-size: 0.82rem;
-        white-space: nowrap;
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -344,7 +383,8 @@
     <div class="container nav">
       <a href="#top" class="logo">CON<span>TEC</span></a>
       <div class="nav-right">
-        <nav class="nav-links">
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-i18n="menu_label">Menú</button>
+        <nav id="site-nav" class="nav-links">
           <a href="#services" data-i18n="nav_services">Servicios</a>
           <a href="#value" data-i18n="nav_value">Propuesta de Valor</a>
           <a href="#gallery" data-i18n="nav_gallery">Operaciones</a>
@@ -747,6 +787,7 @@
             <h2 data-i18n="form_title">Solicite Información o Cotización</h2>
             <p style="color:var(--slate); margin:0.75rem 0 1rem;" data-i18n="form_desc">Cuéntenos qué tipo de refrigerante, equipo RAC o requerimiento industrial necesita gestionar y nuestro equipo se pondrá en contacto.</p>
             <p style="font-size:0.9rem; color:var(--slate);" data-i18n="form_note">Atención enfocada en empresas comerciales, plantas industriales y gestores de infraestructura.</p>
+            <p class="contact-address" data-i18n="addr">Bo. Guadalupe, 20 y 21 Calle, 4 ave., Sector N.E., S.P.S.</p>
             <div class="contact-lines">
               <a href="tel:+50498114628">(+504) 9811-4628</a>
               <a href="mailto:contecwn@gmail.com">contecwn@gmail.com</a>
@@ -774,8 +815,14 @@
   </main>
 
   <footer>
-    <div class="container">
+    <div class="container footer-grid">
       <span data-i18n="footer_text">© 2026 CONTEC. Gestión integral de refrigerantes, equipos frigoríficos e ingeniería.</span>
+      <address class="footer-contact">
+        <strong data-i18n="addr_title">San Pedro Sula</strong>
+        <span data-i18n="addr">Bo. Guadalupe, 20 y 21 Calle, 4 ave., Sector N.E., S.P.S.</span>
+        <a href="tel:+50498114628">(+504) 9811-4628</a>
+        <a href="mailto:contecwn@gmail.com">contecwn@gmail.com</a>
+      </address>
     </div>
   </footer>
 
@@ -789,6 +836,9 @@
         nav_value: "Propuesta de Valor",
         nav_gallery: "Operaciones",
         nav_cta: "Solicitar Cotización",
+        menu_label: "Menú",
+        addr_title: "San Pedro Sula",
+        addr: "Bo. Guadalupe, 20 y 21 Calle, 4 ave., Sector N.E., S.P.S.",
         hero_badge: "REFRIGERACIÓN · SUSTANCIAS REFRIGERANTES · INGENIERÍA",
         hero_title: "Gestión integral de equipos frigoríficos, refrigerantes e ingeniería industrial.",
         hero_subtitle: "En CONTEC brindamos soluciones técnicas y ambientalmente responsables para la recuperación, reciclaje, regeneración y manejo de sustancias refrigerantes, disposición de equipos en desuso y servicios de refrigeración industrial y comercial.",
@@ -876,6 +926,9 @@
         nav_value: "Value Proposition",
         nav_gallery: "Operations",
         nav_cta: "Request a Quote",
+        menu_label: "Menu",
+        addr_title: "San Pedro Sula",
+        addr: "Bo. Guadalupe, 20 y 21 Calle, 4 ave., Sector N.E., S.P.S.",
         hero_badge: "REFRIGERATION · REFRIGERANTS · ENGINEERING",
         hero_title: "Integrated management of refrigeration equipment, refrigerants and industrial engineering.",
         hero_subtitle: "CONTEC provides technically sound and environmentally responsible solutions for refrigerant recovery, recycling and reclamation, disposal of retired equipment, and industrial and commercial refrigeration services.",
@@ -986,6 +1039,19 @@
 
     document.querySelectorAll(".lang-btn").forEach((btn) => {
       btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+    });
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const siteNav = document.getElementById("site-nav");
+    function setMenuOpen(open) {
+      siteNav.classList.toggle("is-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    menuToggle.addEventListener("click", () => {
+      setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
     });
 
     document.getElementById("quote-form").addEventListener("submit", async (event) => {
