@@ -1,773 +1,267 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html class=""><!--<![endif]-->
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryoCycle | Commercial Refrigerant Recovery, Recycling & Reclamation</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --navy: #0f172a;
+      --slate: #475569;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --emerald: #059669;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+    /* Compliance Strip */
+    .top-bar {
+      background: var(--navy);
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      padding: 0.5rem 1.5rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .top-bar span { color: #38bdf8; font-weight: 600; }
 
-	<title>Construcciones Tecnicas</title>
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--slate); font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--navy); }
 
-	<!-- Standard Favicon -->
-	<link rel="icon" type="image/x-icon" href="images//favicon.ico" />
-	
-	<!-- For iPhone 4 Retina display: -->
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images//apple-touch-icon-114x114-precomposed.png">
-	
-	<!-- For iPad: -->
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images//apple-touch-icon-72x72-precomposed.png">
-	
-	<!-- For iPhone: -->
-	<link rel="apple-touch-icon-precomposed" href="images//apple-touch-icon-57x57-precomposed.png">	
-	
-	<!-- Library - Loader CSS -->
-	<link rel="stylesheet" type="text/css" href="libraries/loader/loaders.min.css">
+    /* Buttons */
+    .btn {
+      display: inline-block; padding: 0.75rem 1.4rem; border-radius: 8px;
+      font-weight: 600; text-decoration: none; transition: 0.2s ease; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-outline { background: var(--surface); color: var(--navy); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--navy); }
 
-	<!-- Library - Google Font Familys -->
-	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Philosopher:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    /* Hero */
+    .hero { padding: 5rem 0 4rem; }
+    .badge {
+      display: inline-block; background: #e0f2fe; color: var(--accent-dark);
+      padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.5vw, 3.6rem);
+      line-height: 1.12; letter-spacing: -0.03em; max-width: 820px; margin-bottom: 1.25rem;
+    }
+    .hero p {
+      font-size: 1.15rem; color: var(--slate); max-width: 650px; margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .trust-metrics {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .metric strong { display: block; font-size: 1.5rem; color: var(--navy); }
+    .metric span { font-size: 0.875rem; color: var(--slate); }
 
-	<!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/bootstrap.min.css">
-	
-	<!-- Font Icons -->
-	<link rel="stylesheet" type="text/css" href="libraries/fonts/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="libraries/fonts/elegant-icons.css">
+    /* Bento 3 Rs Grid */
+    section { padding: 4.5rem 0; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-header h2 { font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .section-header p { color: var(--slate); max-width: 600px; }
 
-	<!-- Library - OWL Carousel V.2.0 beta -->
-	<link rel="stylesheet" type="text/css" href="libraries/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="libraries/owl-carousel/owl.theme.css">
-	
-	<!-- Library - Animate CSS -->
-	<link rel="stylesheet" type="text/css" href="libraries/animate/animate.min.css">
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; transition: 0.2s ease;
+    }
+    .card:hover { border-color: var(--accent); box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.08); }
+    .card-tag { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+    .card h3 { font-size: 1.35rem; margin: 0.5rem 0 0.75rem; }
+    .card p { color: var(--slate); font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .card ul { list-style: none; font-size: 0.9rem; color: var(--navy); }
+    .card li { padding: 0.35rem 0; border-top: 1px solid #f1f5f9; }
 
-	<!-- Library - Magnific Popup -->
-	<link rel="stylesheet" type="text/css" href="libraries/magnific-popup/magnific-popup.css">
+    /* Gas Pills */
+    .gas-panel {
+      background: var(--navy); color: #fff; border-radius: var(--radius); padding: 2.5rem;
+    }
+    .gas-list { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.5rem; }
+    .gas-pill {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 0.45rem 0.9rem; border-radius: 6px; font-size: 0.9rem; color: #38bdf8;
+    }
 
-	<!-- Custom - Common CSS -->
-	<link rel="stylesheet" type="text/css" href="css/plugins.css">
-	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
+    /* Quote Form */
+    .quote-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2.5rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+    }
+    form { display: grid; gap: 1rem; }
+    input, select, textarea {
+      width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border);
+      border-radius: 8px; font: inherit; font-size: 0.95rem;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
 
-	<!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="css/all-ie-only.css" />
-	<![endif]-->
-	
-	<!-- Custom - Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="css/shortcodes.css">
-	
-	
-
-	<!--[if lt IE 9]>
-		<script src="js/html5/respond.min.js"></script>
-    <![endif]-->
+    footer {
+      border-top: 1px solid var(--border); padding: 2.5rem 0; color: var(--slate); font-size: 0.875rem;
+    }
+    @media (max-width: 768px) { .nav-links a:not(.btn) { display: none; } }
+  </style>
 </head>
+<body>
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
-	<!-- Loader -->
-	<div id="site-loader" class="load-complete">
-		<div class="loader">
-			<div class="loader-inner ball-clip-rotate">
-				<div></div>
-			</div>
-		</div>
-	</div><!-- Loader /- -->
-	
-	<a id="top"></a>
-	<!-- Main Container -->
-	<div class="main-container">
-		<!-- Header -->
-		<header class="header-main">
-			<!-- Top Header -->
-			<!-- Logo Block -->
-			<div class="middle-header container-fluid no-padding">
-				<!-- Container -->
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3 logo-block pull-left">
-						 <a href="#" title="Logo"><img src="images/logo1.png" alt="Logo" /></a> 
-						</div>
-						 <div class="col-md-9 text-right pull-right">
-							<div class="location">
-								<h3><img src="images/location-ic.png" alt="Location" /> Direccion</h3>
-								<p>San Pedro Sula, Bo. Guadalupe <br>20 y 21 Calle, 4 ave., Sector N.E., S.P.S.</p>
-							</div>
-							<div class="phone">
-								<h3><img src="images/phone-ic.png" alt="phone" /> (+504) 9811-4628</h3>
-								<p>Llamanos<br> &nbsp; </p>
-							</div>
-						</div> 
-					</div>
-				</div><!-- Container -->
-			</div><!-- Logo Block /- -->
-			<!-- Navigation -->
-			<nav class="navbar ow-navigation">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-2 col-sm-2 no-padding">
-						</div>
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div id="navbar" class="navbar-collapse collapse">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.html">Inicio</a></li>	
-								<li><a href="about.html">Quienes Somos</a></li>						
-								<li><a href="services.html">Servicios</a></li>
-								<li><a href="beneficio.html">Beneficio Ambiental</a></li>
-								<li><a href="departments.html">Contacto</a></li>														
-							</ul>						
-						</div>
-					</div>
-				</div>
-			</nav>
-		</header>
-	
-		<!-- Banner Section -->
-		<div id="home-banner" class="container-fluid no-padding banner-section home-banner">
-			<!-- Container -->
-			<div class="container">	
-			   im here		
-		<!-- 		<div id="main-carousel" class="carousel slide" data-ride="carousel">				
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<div class="col-md-6 col-sm-6 no-padding">
-								<div class="banner-left">
-									<span>The Best Hospitality WP Theme Forever!</span>
-									<h3>we care for your health</h3>
-									<p>Qualified Staff With Expertise in Services We Offer for more Resonable cost with love, Just explore about More!</p>
-									<a href="#">View Our Services<i class="fa fa-plus"></i></a>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 no-padding">
-								<div class="banner-right">
-									<img src="images/banner-main.png" alt="banner-main"/>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-md-6 col-sm-6 no-padding">
-								<div class="banner-left">
-									<span>The Best Hospitality WP Theme Forever!</span>
-									<h3>we care for your health</h3>
-									<p>Qualified Staff With Expertise in Services We Offer for more Resonable cost with love, Just explore about More!</p>
-									<a href="#">View Our Services<i class="fa fa-plus"></i></a>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 no-padding">
-								<div class="banner-right">
-									<img src="images/banner-main.png" alt="banner-main"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div><!-- Container /- -->
+  <div class="top-bar">
+    <span>EPA Section 608 Certified</span> · AHRI-700 Purity Reclamation · Full Chain-of-Custody Documentation
+  </div>
 
-			<!-- Shape -->
-<!-- 			<div class="banner-shape container-fluid no-padding">
-				<div class="col-md-6 col-sm-6 col-xs-6 shape-left no-padding">
-					<div class="left-shape-blue">				
-						<svg width="100%" height="100%">
-							<clipPath id="clipPolygon2" clipPathUnits="objectBoundingBox">
-								<polygon points="0 0, 0 100, 120 100, 0 0"></polygon>
-							</clipPath>
-						</svg>
-					</div>	
-					<div class="left-shape">				
-						<svg width="100%" height="100%">
-							<clipPath id="clipPolygon1" clipPathUnits="objectBoundingBox">
-								<polygon points="0 0, 0 100, 100 100, 0 0"></polygon>
-							</clipPath>
-						</svg>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6 col-xs-6 shape-right no-padding">
-					<div class="right-shape-blue">				
-						<svg width="100%" height="100%">
-							<clipPath id="clipPolygon3" clipPathUnits="objectBoundingBox">
-								<polygon points="1 0.2, 0 1, 0 0.835, 1 0"></polygon>
-							</clipPath>
-						</svg>
-					</div>	
-					<div class="right-shape">				
-						<svg width="100%" height="100%">
-							<clipPath id="clipPolygon4" clipPathUnits="objectBoundingBox">
-								<polygon points="1 0, 0 1, 100 100, 100 0"></polygon>
-							</clipPath>
-						</svg>
-					</div>
-				</div>
-			</div>
- -->			<!-- Shape /- -->
-		</div><!-- Banner Section /- -->
+  <header>
+    <div class="container nav">
+      <div class="logo">CRYO<span>CYCLE</span></div>
+      <nav class="nav-links">
+        <a href="#services">The 3 Rs</a>
+        <a href="#refrigerants">Accepted Gases</a>
+        <a href="#quote" class="btn btn-primary">Request Pickup</a>
+      </nav>
+    </div>
+  </header>
 
-		<!-- Message Borad -->
-		<div id="message-borad" class="container-fluid no-padding message-borad">
-			<!-- Container -->
-			<div class="container">
-				<div class="row">
-					<!-- Emargency Case -->
-					<div class="col-md-6 col-sm-6 emargency-case">
-						<div class="col-md-6 message-block no-left-padding">
-							<h3>Emergency case</h3>
-							<p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
-							<a href="#">More Details<i class="fa fa-caret-right"></i></a>
-						</div>
-						<div class="col-md-6 message-block no-right-padding">
-							<h3>New Registration</h3>
-							<p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
-							<a href="#">More Details<i class="fa fa-caret-right"></i></a>
-						</div>
-					</div><!-- Emargency Case /- -->
-					<!-- Opening Hours -->
-					<div class="col-md-6 col-sm-6 opening-hours">
-						<div class="col-md-6 message-block no-padding">
-							<h3>opening hours</h3>
-							<ul>
-								<li>Monday - Friday<span class="pull-right">8.00 – 18.00</span></li>
-								<li>Saturday<span class="pull-right">8.00 – 16.00</span></li>
-								<li>Sunday<span class="pull-right">8.00 – 13.00</span></li>
-							</ul>
-						</div>
-						<div class="col-md-6 message-block">
-							<h3>doctors Timetable</h3>
-							<p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori las quos dolores et quas mole.</p>
-							<a href="#">More Details<i class="fa fa-caret-right"></i></a>
-						</div>
-					</div><!-- Opening Hours /- -->
-				</div>
-			</div><!-- Container /- -->
-		</div><!-- Message Borad /- -->
-		
-		<!-- Service Section -->
-		<div id="service-section" class="container-fluid no-padding service-section">
-			<!-- Container -->
-			<div class="container">
-				<!-- Row -->
-				<div class="row">
-					<!-- Service -->
-<!-- 					<div class="col-md-8 col-sm-12 col-xs-12 service">
-						<div class="section-header">
-							<h3>Welcome to medical</h3>
-							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,  totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="service-block">
-									<div class="service-block-icon">
-										<i><img src="images/ambulance.png" alt="ambulance"/></i>
-										<i><img src="images/ambulance-white.png" alt="ambulance-white"/></i>
-									</div>
-									<div class="service-block-content">
-										<h3>Emergency services</h3>
-										<p>Dolor sit amet consecdi pisicing eliam sed do eiusmod tempornu.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="service-block">
-									<div class="service-block-icon">
-										<i><img src="images/heart-ic.png" alt="heart-ic"/></i>
-										<i><img src="images/heart-ic-white.png" alt="heart-ic-white"/></i>
-									</div>
-									<div class="service-block-content">
-										<h3>Qualified Doctors</h3>
-										<p>Dolor sit amet consecdi pisicing eliam sed do eiusmod tempornu.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="service-block">
-									<div class="service-block-icon">
-										<i><img src="images/phone.png" alt="phone"/></i>
-										<i><img src="images/phone-white.png" alt="phone-white"/></i>
-									</div>
-									<div class="service-block-content">
-										<h3>24/7 support</h3>
-										<p>Dolor sit amet consecdi pisicing eliam sed do eiusmod tempornu.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="service-block">
-									<div class="service-block-icon">
-										<i><img src="images/appoinment-latter.png" alt="appoinment-latter"/></i>
-										<i><img src="images/appoinment-latter-white.png" alt="appoinment-latter-white"/></i>
-									</div>
-									<div class="service-block-content">
-										<h3>online appointment</h3>
-										<p>Dolor sit amet consecdi pisicing eliam sed do eiusmod tempornu.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div><!-- Service /- -->				
-<!-- 					<div class="col-md-4 col-sm-12 col-xs-12">						
-						<form class="appoinment-form">
-							<h3><img src="images/appoinment.png" alt="appoinment"/>Appointment form</h3>
-							<div class="form-group col-md-12 no-padding">							
-								<input type="text" id="your-name" class="form-control" placeholder="Your Name">
-							</div>					
-							<div class="form-group col-md-12 no-padding">							
-								<input type="email" id="email" class="form-control" placeholder="Email Address">
-							</div>
-							<div class="form-group input-group col-md-12 no-padding">
-								<div class="col-md-7 no-padding">
-									<div class="col-md-6 col-sm-4 col-xs-4 no-left-padding">
-										<select class="form-control">
-											<option>Day</option>
-											<option>Sunday</option>
-											<option>Monday</option>
-										</select>
-									</div>
-									<div class="col-md-6 col-sm-4 col-xs-4 no-left-padding">
-										<select class="form-control">
-											<option>Time</option>
-											<option>AM</option>
-											<option>PM</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-5 col-sm-4 col-xs-4 no-padding">
-									<select class="form-control">
-										<option>Doctor Name</option>
-										<option>Mr.XYZ</option>
-										<option>Mr.ABC</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group col-md-12 col-sm-12 col-xs-12 no-padding">							
-								<textarea rows="4" id="textarea_message" class="form-control" placeholder="Your Message..."></textarea>
-							</div>
-							<div class="form-group col-md-12 col-sm-12 col-xs-12 no-padding">
-								<input type="checkbox"><span>Send Email Notification</span>							
-								<button type="submit" id="btn_submit" class="btn-submit pull-right">
-								<img src="images/heart-sm.png" alt="heart-sm">Submit</button>
-							</div>
-						</form>
-					</div>  -->
-				</div>
-			</div><!-- Container /- -->
-		</div><!-- Service Section /- -->
-		
-		<!-- Call Out -->
-		<div id="call-out" class="container-fluid no-padding call-out">
-			<!-- Container -->
-			<div class="container">
-				<div class="call-out-content row">
-					<div class="col-md-10 col-sm-9 col-xs-12">
-						<h3>Are You Ready to <span>Buy this theme!</span></h3>
-						<p>Blanditiis praesentium voluptatum deleniti atque  soluta nobis est eligendi optio cumque nihil.</p>
-					</div>
-					<div class="col-md-2 col-sm-3 col-xs-12">
-						<a href="#" title="Purchase Now">Purchase Now</a>
-					</div>
-				</div>
-			</div><!-- Container /- -->
-		</div><!-- Call Out /- -->
-		
-		<!-- What We Do Best -->
-		<div id="what-we-do-best" class="container-fluid no-padding what-we-do-best">					
-			<!-- What We Do Best Left -->
-<!-- 			<div class="what-we-do-left col-md-4 no-padding">
-				<img src="images/what-we-do-best.jpg" alt="what-we-do-best">
-			</div>r			
-			<div class="col-md-8 what-we-do-right no-padding">
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/pulmonary.png" alt="pulmonary"/></i>
-							<h5>Pulmonary</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/cardiology.png" alt="Cardiology"/></i>
-							<h5>Cardiology</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/traumatology.png" alt="Traumatology"/></i>
-							<h5>Traumatology</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/neurology.png" alt="Neurology"/></i>
-							<h5>Neurology</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding what-we-do-title">
-					<div class="what-we-do-block">
-						<img src="images/what-we-do-best-block-title-bg.jpg" alt="what-we-do-best-title"/>
-						<div class="what-we-do-block-content">
-							<h3>What we do best</h3>					
-							<p>Dolor sit amet consecdi pisicing eliam sedo</p>
-							<span><img src="images/section-seprator.png" alt="section-seprator"/></span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/x-ray.png" alt="X-ray"/></i>
-							<h5>X-ray</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/nuclear-magnetic.png" alt="Nuclear magnetic"/></i>
-							<h5>Nuclear magnetic</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/diagnostic.png" alt="Diagnostic"/></i>
-							<h5>Diagnostic</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 col-xs-6 no-padding">
-					<div class="what-we-do-block">					
-						<img src="images/what-we-do-best-block-bg.jpg" alt="what-we-do-best"/>
-						<div class="what-we-do-block-content">
-							<i><img src="images/blood-test.png" alt="Blood test"/></i>
-							<h5>Blood test</h5>
-							<p>Nam libero tempore cumas soluta eligendi </p>
-						</div>
-					</div>
-				</div>
-			</div> -->
-		</div><!-- What We Do Best /- -->
-		
-		<!-- Team Section -->
-		<div id="team-section" class="container-fluid no-paddding team-section">
-			<div class="container">
-<!-- 				<div class="section-header">
-					<h3>meet our doctors</h3>
-					<p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</p>
-				</div>
-				<div class="team-carousel">
-					<div class="col-md-12 team-type">
-						<img src="images/doctor-1.jpg" alt="doctor-1"/>
-						<div class="member-content">
-							<div class="member-name">
-								<h6>Dr.Adaline Becka</h6>
-								<p>Dental Specialist</p>
-							</div>
-							<div class="member-contact">
-								<a title="Phone" href="#"><img src="images/ftr-phone.png" alt="Phone" /></a>
-								<a title="Mail" href="#"><img src="images/ftr-email.png" alt="Email" /></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 team-type">
-						<img src="images/doctor-2.jpg" alt="doctor-2"/>
-						<div class="member-content">
-							<div class="member-name">
-								<h6>Dr.Adaline Becka</h6>
-								<p>Dental Specialist</p>
-							</div>
-							<div class="member-contact">
-								<a title="Phone" href="#"><img src="images/ftr-phone.png" alt="Phone" /></a>
-								<a title="Mail" href="#"><img src="images/ftr-email.png" alt="Email" /></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 team-type">
-						<img src="images/doctor-3.jpg" alt="doctor-3"/>
-						<div class="member-content">
-							<div class="member-name">
-								<h6>Dr.Adaline Becka</h6>
-								<p>Dental Specialist</p>
-							</div>
-							<div class="member-contact">
-								<a title="Phone" href="#"><img src="images/ftr-phone.png" alt="Phone" /></a>
-								<a title="Mail" href="#"><img src="images/ftr-email.png" alt="Email" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a title="View All Doctors" href="#">View All Doctors<i class="fa fa-plus"></i></a>
- -->			</div>
-		</div>
-		
-		<!-- Departments Section -->
-		<div class="container-fluid no-padding department-section">
-<!-- 			<div class="we-are-best col-md-6 col-sm-12 no-padding">
-				<div class="section-header">
-					<h3>Why We Are Best</h3>
-					<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum delaut eniti atque corrupti quos dolores et quas.</p>
-				</div>
-				<div class="we-are-best-block">
-					<div class="we-are-best-icon">
-						<img src="images/dp-icon-1.png" alt="dp-icon-1"/>
-					</div>
-					<div class="we-are-best-content">
-						<h3>Free Medical Counseling</h3>
-						<p>Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores euas molestias excepturi sint occaecati cupiditate.</p>
-					</div>
-				</div>
-				<div class="we-are-best-block">
-					<div class="we-are-best-icon">
-						<img src="images/dp-icon-2.png" alt="dp-icon-2"/>
-					</div>
-					<div class="we-are-best-content">
-						<h3>Well Experienced Doctors</h3>
-						<p>Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores euas molestias excepturi sint occaecati cupiditate.</p>
-					</div>
-				</div>
-				<div class="we-are-best-block">
-					<div class="we-are-best-icon">
-						<img src="images/dp-icon-3.png" alt="dp-icon-3"/>
-					</div>
-					<div class="we-are-best-content">
-						<h3>Online Bill Payment</h3>
-						<p>Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores euas molestias excepturi sint occaecati cupiditate.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-sm-12 departments no-padding">
-				<div class="departments-bg">
-					<img src="images/departments-bg.jpg" alt="departments-bg"/>
-				</div>
-				<div class="section-header">
-					<h3>Hospital Departments</h3>				
-				</div>
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading1">
-							<h4 class="panel-title">
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-1" aria-expanded="true">
-									Ophthalmology Clinic<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="dept-heading1">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading2">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-2" aria-expanded="false">
-									Cardiac Clinic<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dept-heading2">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading3">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-3" aria-expanded="false">
-									Outpatient Surgery<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dept-heading3">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading4">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-4" aria-expanded="false">
-									Pediatric Clinic<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dept-heading4">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading5">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-5" aria-expanded="false">
-									Gynaecological Clinic<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dept-heading5">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="dept-heading6">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#dept-type-6" aria-expanded="false">
-									Ophthalmology Clinic<i class="fa fa-plus pull-right"></i>
-								</a>
-							</h4>
-						</div>
-						<div id="dept-type-6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dept-heading6">
-							<div class="panel-img">
-								<img src="images/panel-img-1.jpg" alt="panel-img"/>
-							</div>
-							<div class="panel-body">
-								<p>Blanditiis praesentium voluptatum delniti atque corrupti quos dlores quas molestias excepturi sint occaecati cupiditate non provident siili sunt in culpa qui officia deserunt.</p>
-								<a href="#">More Details<i class="fa fa-plus"></i></a>							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-		</div>
-		
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge mono">B2B REFRIGERANT MANAGEMENT</span>
+        <h1>Compliant Refrigerant Recovery, Recycling &amp; Reclamation.</h1>
+        <p>Turn recovered gas into compliant documentation or immediate rebate value. We serve commercial HVAC contractors, chiller plants, and industrial facilities with rapid cylinder swaps and certified AHRI-700 processing.</p>
+        <div class="hero-actions">
+          <a href="#quote" class="btn btn-primary">Schedule Cylinder Pickup</a>
+          <a href="#refrigerants" class="btn btn-outline">View Accepted Refrigerants</a>
+        </div>
+        <div class="trust-metrics">
+          <div class="metric"><strong class="mono">AHRI-700</strong><span>Certified Purity Standard</span></div>
+          <div class="metric"><strong class="mono">48-Hr</strong><span>Cylinder Exchange Turnaround</span></div>
+          <div class="metric"><strong class="mono">100%</strong><span>Audit-Ready EPA Manifests</span></div>
+        </div>
+      </div>
+    </section>
 
-		
+    <section id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Complete Lifecycle Management: The 3 Rs</h2>
+          <p>End-to-end handling built to keep your technicians on the job and your compliance records bulletproof.</p>
+        </div>
+        <div class="bento-grid">
+          <article class="card">
+            <span class="card-tag mono">01 / Recovery</span>
+            <h3>On-Site Evacuation &amp; Cylinders</h3>
+            <p>High-speed recovery support for large commercial chillers, supermarket racks, and system decommissions.</p>
+            <ul>
+              <li>DOT-certified recovery cylinders supplied</li>
+              <li>High-capacity recovery units for bulk jobs</li>
+              <li>Zero venting, zero regulatory exposure</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="card-tag mono">02 / Recycling</span>
+            <h3>Filtration &amp; Reuse Prep</h3>
+            <p>Remove oil, acid, particulates, and moisture so refrigerants can be safely recharged into your own equipment.</p>
+            <ul>
+              <li>Multi-stage oil &amp; moisture separation</li>
+              <li>Extends operational life of legacy systems</li>
+              <li>Reduces virgin refrigerant purchasing costs</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="card-tag mono">03 / Reclamation</span>
+            <h3>AHRI-700 Distillation &amp; Buyback</h3>
+            <p>Full chemical reprocessing back to virgin factory specifications with competitive buyback credits for clean gas.</p>
+            <ul>
+              <li>Gas chromatography lab verification</li>
+              <li>Official EPA reclamation certificates issued</li>
+              <li>Cash payout or cylinder credit options</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-	
+    <section id="refrigerants">
+      <div class="container">
+        <div class="gas-panel">
+          <h2>Accepted Refrigerants</h2>
+          <p style="color:#cbd5e1; margin-top:0.5rem;">We process CFCs, HCFCs, HFCs, and next-generation HFO blends. Keep gases unmixed for maximum buyback value.</p>
+          <div class="gas-list mono">
+            <span class="gas-pill">R-22</span>
+            <span class="gas-pill">R-410A</span>
+            <span class="gas-pill">R-134a</span>
+            <span class="gas-pill">R-404A</span>
+            <span class="gas-pill">R-407C</span>
+            <span class="gas-pill">R-507</span>
+            <span class="gas-pill">R-123</span>
+            <span class="gas-pill">R-1234yf</span>
+            <span class="gas-pill">R-513A</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<footer class="footer-main container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<!-- Contact Detail -->
-				<div class="contact-details">
-					<div class="col-md-4 col-sm-4 address-box detail-box">
-						<i><img src="images/ftr-location.png" alt="Loactaion" /></i>
-						<h4>Direccion</h4>
-						<p>San Pedro Sula, Bo. Guadalupe 20 y 21 Calle, 4 ave., Sector N.E., S.P.S.</p>						
-					</div>
-					<div class="col-md-4 col-sm-4 phone-box detail-box">
-						<i><img src="images/ftr-phone.png" alt="Phone" /></i>
-						<h4>Telefonos</h4>
-						<p>Celular: (+504) 9811-4628</p>
-						<p><br></p>						
-					</div>
-					<div class="col-md-4 col-sm-4 mail-box detail-box">
-						<i><img src="images/ftr-email.png" alt="Email" /></i>
-						<h4>Escribanos</h4>
-						<p><a href="mailto:info@maxihealth.com">info@contechs.com</a></p>
-						<p><a href="mailto:support@maxihealth.com">support@contechs.com</a></p>
-					</div>
-				</diV><!-- Contact Detail /- -->				
-				<div class="row">
-					<div class="col-md-4 col-sm-6 col-xs-12">
+    <section id="quote">
+      <div class="container">
+        <div class="quote-box">
+          <div>
+            <h2>Schedule a Pickup or Buyback Quote</h2>
+            <p style="color:var(--slate); margin:0.75rem 0 1.5rem;">Tell us what refrigerant and cylinder volume you have on hand. Our dispatch team responds within 2 business hours.</p>
+            <p style="font-size:0.9rem; color:var(--slate);"><strong>Tip:</strong> Separating refrigerant types by cylinder guarantees top-tier buyback pricing and avoids mixed-gas separation fees.</p>
+          </div>
+          <form>
+            <input type="text" placeholder="Company / Contractor Name" required />
+            <input type="email" placeholder="Work Email" required />
+            <select required>
+              <option value="">Select Primary Service...</option>
+              <option>Refrigerant Buyback / Reclamation</option>
+              <option>On-Site Commercial Recovery</option>
+              <option>Cylinder Swap / Drop-Off</option>
+            </select>
+            <input type="text" placeholder="Refrigerant Type(s) & Est. Weight (e.g., 300 lbs R-410A)" />
+            <button type="submit" class="btn btn-primary">Request Quote &amp; Manifest</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-12">
+  <footer>
+    <div class="container">
+      © 2026 CryoCycle Refrigerant Management. EPA Section 608 &amp; AHRI-700 Compliant Operations.
+    </div>
+  </footer>
 
-					</div>
-				</div>
-			</div><!-- Container /- -->
-			<!-- Bottom Footer -->
-			<div class="container-fluid no-padding bottom-footer">
-				<p>&copy; 2018 Contec.</p>
-			</div><!-- Bottom Footer /- -->
-		</footer><!-- Footer /- -->
-	
-	</div><!-- Main Container -->
-	
-	<!-- JQuery v1.11.3 -->
-	<script src="js/jquery.min.js"></script>
-
-	<!-- Library - Modernizer -->
-	<script src="libraries/modernizr/modernizr.js"></script>
-	
-	<!-- Library - Bootstrap v3.3.5 -->
-	<script src="libraries/bootstrap/bootstrap.min.js"></script><!-- Bootstrap JS File v3.3.5 -->
-
-	<!-- jQuery Easing v1.3 -->
-	<script src="js/jquery.easing.min.js"></script>
-
-	<!-- Library - jQuery.appear -->
-	<script src="libraries/appear/jquery.appear.js"></script>
-	
-	<!-- Library - OWL Carousel V.2.0 beta -->
-	<script src="libraries/owl-carousel/owl.carousel.min.js"></script>
-	
-	<!-- jQuery For Number Counter -->
-	<script src="libraries/number/jquery.animateNumber.min.js"></script>
-	
-	<!-- Library - Isotope Portfolio Filter -->
-	<script src="libraries/isotope/isotope.pkgd.min.js"></script>
-	
-	<!-- Library - Magnific Popup - v1.0.0 -->
-	<script src="libraries/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-	<!-- Library - Google Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-	
-	<!-- Library - Theme JS -->
-	<script src="js/functions.js"></script>
 </body>
 </html>
